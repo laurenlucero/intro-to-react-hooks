@@ -1,7 +1,7 @@
-import { DataTable } from '@edx/paragon';
-import React,  {useState, useEffect } from 'react';
-import GhibliApiService from '../services/ghibliApi';
-import { MovieTable } from '../helperComponents';
+import { DataTable } from "@edx/paragon";
+import React, { useState, useEffect } from "react";
+import GhibliApiService from "../services/ghibliApi";
+import { MovieTable } from "../helperComponents";
 
 /* INSTRUCTIONS for useEffect
 
@@ -17,17 +17,26 @@ import { MovieTable } from '../helperComponents';
 
 */
 
-
-
 const GhibliMovies = () => {
   const [movies, setMovies] = useState([]);
+
+  useEffect(() => {
+    let mounted = true;
+    GhibliApiService.getMovieList().then((data) => {
+      if (mounted) {
+        setMovies(data);
+        console.log(data);
+      }
+    });
+    return () => (mounted = false);
+  }, []);
 
   return (
     <>
       <h1>useEffect</h1>
       <MovieTable movies={movies} />
     </>
-  )
+  );
 };
 
 export default GhibliMovies;
