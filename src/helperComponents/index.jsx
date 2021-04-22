@@ -1,1 +1,1 @@
-export { default as MovieTable } from './MovieTable';
+export { default as MovieTable } from "./MovieTable";

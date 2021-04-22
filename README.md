@@ -5,11 +5,13 @@ This app is meant to be used as a workshop for teaching react hooks. Workshop co
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Prerequisites
+
 Some experience with React. You should know about the component lifecycle, lifecycle methods, etc.
 
 ## Getting started
 
 To get the app up and running, run:
+
 ```
 npm install
 npm start
@@ -29,25 +31,27 @@ React hooks allow function components to have state, to use side effects, and be
 This is a syntax you'll see a lot in hooks documentation and usage
 
 ### Array destructuring
+
 ```javascript
-const answersArr = ['Yeah', 'Nah']
-const [yes, no] = answersArr
+const answersArr = ["Yeah", "Nah"];
+const [yes, no] = answersArr;
 
 // equivalent to
-const yes = answersArr[0]
-const no = answersArr[1]
+const yes = answersArr[0];
+const no = answersArr[1];
 ```
 
 ### Object destructuring
+
 In object destructuring, the name of the variable being assigned to must be the same as the key of the object.
 
 ```javascript
-const fruitCounts = { apples: 2, bananas: 10 }
-const { apples, bananas } = fruitCounts
+const fruitCounts = { apples: 2, bananas: 10 };
+const { apples, bananas } = fruitCounts;
 
 // equivalent to
-const apples = fruitCounts.apples
-const bananas = fruitCounts.bananas
+const apples = fruitCounts.apples;
+const bananas = fruitCounts.bananas;
 ```
 
 You can also do fun things like rename variables that were based on array keys or set defaults for variables that are undefined.
@@ -102,13 +106,13 @@ tells React when to run that function. Different types of hooks get called at di
 ## [Rules of hooks](https://reactjs.org/docs/hooks-rules.html)
 
 1. Hooks can only be called at the top level of a component
-    - do not call hooks from loops, if statements, or nested functions
-    - hooks must be called in **exactly** the same order each time the component renders
+   - do not call hooks from loops, if statements, or nested functions
+   - hooks must be called in **exactly** the same order each time the component renders
 1. Only call hooks from React functions
-    - cannot be called from class components
-    - can be called from custom hook functions
+   - cannot be called from class components
+   - can be called from custom hook functions
 1. You can only have one version of React at a time
-    - hooks can break if your app has multiple versions of React
+   - hooks can break if your app has multiple versions of React
 
 ### But Why?
 
@@ -122,7 +126,6 @@ You can still use hooks without knowing what's under there.
 
 - [About how closure are used](https://www.netlify.com/blog/2019/03/11/deep-dive-how-do-react-hooks-really-work/)
 - [About the data structure backing hooks](https://the-guild.dev/blog/react-hooks-system)
-
 
 ## [useEffect](https://reactjs.org/docs/hooks-effect.html)
 
@@ -152,13 +155,16 @@ This is an array of values, and if any one of the values in the array changes, R
 only want the effect to run on mount, you can pass it an empty array. If there are props or state which affect your `useEffect` function, you can add them to the array, and the function you passed to `useEffect` will be called if the component updates and one of those values changed, similar to logic you might put in `componentDidUpdate`.
 
 ### Return value
+
 `useEffect` has no return value.
 
 ### Exercise
+
 The code for the example is in `src/examples/MovieFacts.jsx`.
 The code for you to finish is in `src/toDo/GhibliMovies.jsx`.
 
 ## [useContext](https://daveceddia.com/usecontext-hook/)
+
 What if I had some state in one component, but I now want to share it accross multiple components or multiple parts of my app?
 This is where `useContext` becomes useful. Instead of moving state up the component tree and drilling down props, we can move state into a
 context and access it via the `useContext` hook.
@@ -167,37 +173,42 @@ So, if I want to create an app where on one page I report the amount of cookies 
 the cookie count, I could wrap both components in a context provider and use the `useContext` hook to access the shared state.
 
 ### Creating context
+
 A context is created using `React.createContext()`.
 If we're creating a context that keeps track of the number of cookies I've eaten, I could create it like so:
 `const CookieContext = React.createContext()`.
 
 ### The context provider
+
 The context provider is the component that holds whatever values you need it to and makes them available to it's child components.
 My cookie context is going to provide a getter and setter for my cookie count to various components. It's a special type of React component that returns a Provider that is part of the CookieContext. It takes a `value` prop. This value can be any value that you want the children to have
 access to. In this case, we're just going to pass the values we got from `useState`.
 
 ```javascript
 const CookieProvider = ({ children }) => {
-  const [cookieCount, setCookieCount] = useState(0)
+  const [cookieCount, setCookieCount] = useState(0);
 
   return (
     <CookieContext.Provider value={[cookieCount, setCookieCount]}>
       {children}
     </CookieContext.Provider>
-  )
-}
+  );
+};
 ```
 
 ### Consuming context
+
 To use the context, children must use the `useContext` hook. So, a component that reports the cookie count might look like:
+
 ```javascript
 const CookieNumber = () => {
-  const [cookieCount] = useContext(CookieContext)
-  return <div>I ate {cookieCount} cookies!</div>
-}
+  const [cookieCount] = useContext(CookieContext);
+  return <div>I ate {cookieCount} cookies!</div>;
+};
 ```
 
 ### Code-Along
+
 We'll do a context example together. It's in `src/toDo/TwoButtons.jsx`.
 
 ## Available Scripts

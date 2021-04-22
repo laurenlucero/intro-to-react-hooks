@@ -1,6 +1,5 @@
-import React, { useState } from 'react';
-import { Button } from '@edx/paragon'
-
+import React, { useState } from "react";
+import { Button } from "@edx/paragon";
 
 const StatefulButton = () => {
   const [clicks, setClicks] = useState(0);
@@ -9,10 +8,18 @@ const StatefulButton = () => {
     <div className="mb-5">
       <h2>useState</h2>
       <div className="py-3">I have been clicked {clicks} times!</div>
-      <Button className="mr-2" variant="primary" onClick={() => setClicks((prevClicks) => prevClicks + 1)}>Click Me</Button>
-      <Button variant="secondary" onClick={() => setClicks(0)}>Clear</Button>
+      <Button
+        className="mr-2"
+        variant="primary"
+        onClick={() => setClicks((prevClicks) => prevClicks + 1)}
+      >
+        Click Me
+      </Button>
+      <Button variant="secondary" onClick={() => setClicks(0)}>
+        Clear
+      </Button>
     </div>
-  )
+  );
 };
 
-export default StatefulButton
+export default StatefulButton;

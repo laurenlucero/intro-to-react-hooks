@@ -1,11 +1,13 @@
-import fetch from 'node-fetch'
+import fetch from "node-fetch";
 
 class GhibliApiService {
-  static baseUrl = 'https://ghibliapi.herokuapp.com/films/';
+  static baseUrl = "https://ghibliapi.herokuapp.com/films/";
 
-  static getMovieList = () => fetch(GhibliApiService.baseUrl).then(data => data.json())
+  static getMovieList = () =>
+    fetch(GhibliApiService.baseUrl).then((data) => data.json());
 
-  static getMovie = (id) => fetch(`${GhibliApiService.baseUrl}${id}`).then(data => data.json())
+  static getMovie = (id) =>
+    fetch(`${GhibliApiService.baseUrl}${id}`).then((data) => data.json());
 }
 
-export default GhibliApiService
+export default GhibliApiService;
