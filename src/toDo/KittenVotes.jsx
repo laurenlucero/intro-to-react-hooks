@@ -15,6 +15,11 @@ const KittenVotes = () => {
   const [meowserClicks, setMeowserClicks] = useState(0);
   const [princessClicks, setPrincessClicks] = useState(0);
 
+  const clearAll = () => {
+    setMeowserClicks(0);
+    setPrincessClicks(0);
+  };
+
   return (
     <>
       <h1>useState</h1>
@@ -23,6 +28,10 @@ const KittenVotes = () => {
       <div className="py-3">
         Princess Purr was clicked {princessClicks} times!
       </div>
+      <div className="py-3">Total votes: {meowserClicks + princessClicks}</div>
+      <Button variant="secondary" onClick={clearAll}>
+        Clear
+      </Button>
       <CardGrid>
         <Card style={{ width: "18rem" }}>
           <Card.Img variant="top" src="http://placekitten.com/200/300" />
