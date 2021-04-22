@@ -39,4 +39,32 @@ const GhibliMovies = () => {
   );
 };
 
-export default GhibliMovies;
+// export default GhibliMovies;
+
+// custom hook (takes the above code and creates a custom hook from it)
+const useMovies = () => {
+  const [movies, setMovies] = useState([]);
+  useEffect(() => {
+    let mounted = true;
+    GhibliApiService.getMovieList().then((data) => {
+      if (mounted) {
+        setMovies(data);
+      }
+      return () => (mounted = false);
+    });
+  }, []);
+  return movies;
+};
+
+const GhibliMoviesWithCustomHook = () => {
+  const movies = useMovies();
+
+  return (
+    <>
+      <h1>useEffect</h1>
+      <MovieTable movies={movies} />
+    </>
+  );
+};
+
+export default GhibliMoviesWithCustomHook;
